@@ -1,10 +1,15 @@
 /**
- * Representation of a Deck of cards.  
- * Initialized to a standard 52 card deck. 
- */
+Rachel Bayersdorfer
+CS 110
+Homework 10: Final Project
+Deck class
+
+Representation of a Deck of cards.  
+Initialized to a standard 52 card deck. 
+*/
 
 import java.util.Random;
-public class Deck 
+public class Deck extends CardPile
 {
    /** 
    *  Number of cards in standard deck {@value #CARDS_IN_DECK}

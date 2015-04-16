@@ -18,9 +18,19 @@ public class Card
    */   
    public Card(int suit, int rank)
    {
-   this.rank=rank;
-   this.suit=suit;
+      this.rank=rank;
+      this.suit=suit;
    }
+   
+   /**
+      Card Copy constructor
+      @param Card card
+   */
+   public Card(Card card)
+   {
+      this.rank=card.rank;
+      this.suit=card.suit;
+   }   
 
    /**
       getSuit() method will return the suit
