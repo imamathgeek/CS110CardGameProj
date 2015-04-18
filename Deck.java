@@ -9,7 +9,7 @@ Initialized to a standard 52 card deck.
 */
 
 import java.util.Random;
-public class Deck extends CardPile
+public class Deck
 {
    /** 
    *  Number of cards in standard deck {@value #CARDS_IN_DECK}
@@ -38,7 +38,7 @@ public class Deck extends CardPile
       deck = new Card[CARDS_IN_DECK];
       for (int r = Card.ACE; r<=Card.KING;r++)
       {
-         for (int s=Card.SPADES;s<=Card.CLUBS;s++)
+         for (int s=Card.SPADES;s<=Card.DIAMONDS;s++)
          {
             deck[ct]=new Card(r,s);
             ct = ct + 1;

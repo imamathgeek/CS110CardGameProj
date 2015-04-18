@@ -6,8 +6,10 @@ War class
 
 public class War
 {
-   private Hand hand1,hand2;
+   private Hand hand;
+   private CardPile hand1,hand2;
    private int moves;
+   private Card player1, player2, warDown1, warDown2, player1War, player2War;
    
    /**
       War constructor creates two hands, deals into the two hands, and sets moves to zero
@@ -15,12 +17,15 @@ public class War
    public War()
    {
       //create two hands
-      hand1=new Hand();
-      hand2=new Hand();
+      hand=new Hand();
       
       //deal the deck into the two hands
-      hand1.dealHand();
-      hand2.dealHand();
+      hand.dealHand();
+      
+      //get the two hands
+      hand1=hand.getHand1();
+      hand2=hand.getHand2();
+      
       
       //set moves to zero
       moves=0;
@@ -33,33 +38,68 @@ public class War
    public int turn()
    {
       //deal the top card of each player
-      Card player1=hand1.dealCard();
-      Card player2=hand2.dealCard();
+      player1=hand1.dealCard();
+      player2=hand2.dealCard();
       
       if (player1.compareTo(player2)>0)
+      {
+         hand1.add(player1);
+         hand1.add(player2);
          return 1;
+
+      }   
       else if (player1.compareTo(player2)<0)
+      {   
+         hand2.add(player1);
+         hand2.add(player2);
          return 2;
+      }
       else
       {
-         while (player1.compareTo(player2)==0)
-         {
+         if (!((hand1.isEmpty()) && !(hand2.isEmpty())))
+         {   
             //deal one card face down
-            hand1.dealCard();
-            hand2.dealCard();
-            
+            warDown1=hand1.dealCard();
+            warDown2=hand2.dealCard();
+         }   
+         else
+            return 0;   
+         
+         if ((!(hand1.isEmpty()) && !(hand2.isEmpty())))
+         {
             //deal the war card
-            Card player1War=hand1.dealCard();
-            Card player2War=hand2.dealCard();
+            player1War=hand1.dealCard();
+            player2War=hand2.dealCard();
             
-            if (player1War.compareTo(player2War)>0)
+           if (player1War.compareTo(player2War)>0)
+           {
+               
+               hand1.add(player1);
+               hand1.add(player2);
+               hand1.add(warDown1);
+               hand1.add(warDown2);
+               hand1.add(player1War);
+               hand1.add(player2War);
                return 1;
-            else if (player1War.compareTo(player2War)<0)
+           }
+           else if (player1War.compareTo(player2War)<0)
+           {
+                
+               hand2.add(player1);
+               hand2.add(player2);
+               hand2.add(warDown1);
+               hand2.add(warDown2);
+               hand2.add(player1War);
+               hand2.add(player2War);
                return 2;
-         }      
+           }     
+
+         }   
+         else
+            return 0;       
       }  
       moves++; 
-      return 1;
+      return 0;
    }
    
    
@@ -78,7 +118,7 @@ public class War
    */   
    public int getWinner()
    {
-      if ((hand1.isEmpty())||(hand2.isEmpty()))
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
          if (hand1.isEmpty())
             return 2;
          if (hand2.isEmpty()) 
