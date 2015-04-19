@@ -68,7 +68,7 @@ public class Card
          SuitString="Diamonds";
          
       if (rank==1)
-         RankString="One";
+         RankString="Ace";
       else if (rank==2)
          RankString="Two";
       else if (rank==3)

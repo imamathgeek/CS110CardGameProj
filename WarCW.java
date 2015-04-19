@@ -38,4 +38,13 @@ public class WarCW
       
       return game.getWinner();
    }   
+   
+   /**
+      getMoves() returns number of moves that have been taken in the game
+      @return int moves
+   */
+   public int getMoves()
+   {
+      return game.getMoves();
+   }      
 }

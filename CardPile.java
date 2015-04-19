@@ -24,17 +24,18 @@ public class CardPile
       add method adds a card to the pile
       @param Card c
    */   
-   public void add(Card c)
+   public void add(int i,Card c)
    {
-      pile.add(0,c);
+      pile.add(i,c);
    }
    
    /**
-      addbottom method adds to the bottom of the pile
+      size method returns the size of the pile
+      @return int
    */
-   public void addBottom(Card c)
+   public int size()
    {
-      pile.add(pile.size(),c);
+      return pile.size();
    }   
    
    /**
@@ -43,17 +44,27 @@ public class CardPile
    */
    public Card dealCard()
    {
-      Card c=(Card)(pile.remove(0));
+      Card c=pile.get(0);
+      pile.remove(0);
       return c;
-   }      
+   }  
    
    /**
-      size method returns the size of the card pile
-      @return int size
+      get() method returns the card at specified index
+      @return Card object
+      @param int index
    */
-   public int size()
+   public Card get(int i)
    {
-      return pile.size();
-   }   
-
+      return pile.get(i);
+   } 
+   
+   /**
+      remove() method removes the card at the specifed index
+      @param int Index
+   */
+   public void remove(int i)
+   {
+      pile.remove(i);
+   }         
 }
