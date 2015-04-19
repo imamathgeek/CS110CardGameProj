@@ -4,6 +4,9 @@ Homework 10: Final Project
 Card class
 */
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Card
 {
     //instance variables
@@ -48,7 +51,57 @@ public class Card
    public int getRank()
    {
       return rank;
-   }     
+   }   
+   
+   
+   /**
+      getSuitString() method will return the suit
+      @return String
+   */
+   public String getSuitString()
+   {
+      String suitString;
+      
+      if (suit==1)
+         suitString="s";
+      else if (suit==2)
+         suitString="c";
+      else if (suit==3)
+         suitString="h";    
+      else
+         suitString="d"; 
+      return suitString;       
+   }   
+   
+   /**
+      showCard() returns a JLabel with the image of the card on it
+      @reutrn JLabel
+   */   
+   public JLabel showCard()
+   {
+      if (this!=null)
+      {
+         JLabel label=new JLabel(new ImageIcon(this.getRank()+this.getSuitString()));
+         return label;
+      }
+      else
+      {
+         JLabel label=new JLabel();
+         return label;
+      }   
+   }
+   
+   /**
+      showBack() method shows the back of the card
+      @return JLabel with back of the card
+   */      
+   public JLabel showBack()
+   {
+      JLabel label=new JLabel(new ImageIcon("back.jpg"));
+      return label;
+   }
+  
+
    
    /**
       toString method returns string representing card

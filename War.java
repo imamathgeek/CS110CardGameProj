@@ -136,6 +136,63 @@ public class War
          return 1;
       else
          return 0;      
+   }   
+   
+   /**
+      getPlayer1Card method returns player1's card (non-war)
+      @return Card c
+   */
+   public Card getPlayer1Card()
+   {
+      return p1;
    }         
 
+   /**
+      getPlayer2Card method returns player2's card (non-war)
+      @return Card c
+   */
+   public Card getPlayer2Card()
+   {
+      return p2;
+   }
+   
+   /**
+      getPlayer1CardWarDown method returns player1's war down card 
+      @return Card c
+   */
+   public Card getPlayer1CardWarDown()
+   {
+      return warDown1;
+   }
+   
+ 
+    /**
+      getPlayer2CardWarDown method returns player1's war card 
+      @return Card c
+   */
+   public Card getPlayer2CardWarDown()
+   {
+      return warDown2;
+   }
+   
+   
+   /**
+      getPlayer2CardWarDown method returns player2's war card 
+      @return Card c
+   */
+   public Card getPlayer1CardWar()
+   {
+      return p1War;
+   }
+   
+  
+     /**
+      getPlayer2CardWarDown method returns player2's war down card 
+      @return Card c
+   */
+   public Card getPlayer2CardWar()
+   {
+      return p2War;
+   } 
+   
 }
