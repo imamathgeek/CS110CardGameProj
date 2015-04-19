@@ -29,6 +29,7 @@ public class Deck extends CardPile
    public Deck()
    {
       freshDeck();
+      shuffle();
    }
    /**
     * Create a new collection of 52 cards, in sorted order
@@ -74,6 +75,8 @@ public class Deck extends CardPile
          deck.set(i,deck.get(randNum));
          deck.set(randNum,temp);
       }  
+      
+      
    }
    /** 
      * Determine if Deck is empty
@@ -91,7 +94,8 @@ public class Deck extends CardPile
    */
    public Card dealCard()
    {
-      Card c=(Card)(deck.remove(0));
+      Card c=deck.get(0);
+      deck.remove(0);
       return c;
    }   
    

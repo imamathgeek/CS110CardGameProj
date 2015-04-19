@@ -10,19 +10,19 @@ public class Hand extends CardPile
    //instance vars
    private static Deck deck;
    private CardPile pile;
-   private int numCards;
    
+      
    /**
       Hand constructor
    */
    public Hand(int num)
    {
-      deck=new Deck();
-      deck.shuffle();
-      for (int i=0;i<num;i++)
+      deck=new Deck(); //create deck
+      
+      for (int i=0;i<num;i++) //add num cards into the hand from the deck
       {
-         Card c=deck.dealCard();
-         pile.add(c);
+         Card c1=deck.dealCard();
+         pile.add(c1);
       }  
    }   
    

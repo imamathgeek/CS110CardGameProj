@@ -34,7 +34,7 @@ public class CardPile
    */
    public void addBottom(Card c)
    {
-      pile.add(c);
+      pile.add(pile.size(),c);
    }   
    
    /**
