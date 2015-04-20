@@ -85,8 +85,7 @@ public class WarGUI extends JFrame
       
          leftPanel.removeAll();
          rightPanel.removeAll();
-         leftPanel.revalidate();
-         rightPanel.revalidate(); 
+          
          
          int w=game.turn();
          
@@ -128,7 +127,8 @@ public class WarGUI extends JFrame
 
          
          
-         
+         leftPanel.revalidate();
+         rightPanel.revalidate();
          
          
                           
@@ -141,20 +141,35 @@ public class WarGUI extends JFrame
       public void actionPerformed(ActionEvent e)
       {  
       
-         while (game.getWinner()==0)
+         while ((game.getWinner()==0) && (game.getMoves()<3000))
          {
-            int w=game.turn();
+            game.turn();
          }
-         moves.setText("Moves: "+game.getMoves());
          
-         int w=game.getWinner();
-
-         if (w==1)
-            status.setText("Player 1 wins this game");
-         else if (w==2)
-            status.setText("Player 2 wins this game"); 
+         if (game.getMoves()!=3000)
+         {
+            moves.setText("Moves: "+game.getMoves());
             
-         skipToEnd.setEnabled(false);   
+            int w=game.getWinner();
+   
+            if (w==1)
+               status.setText("Player 1 wins this game");
+            else if (w==2)
+               status.setText("Player 2 wins this game"); 
+         }
+         else
+         {
+            status.setText("Infinite Game...No winner");
+         }      
+         
+         rightPanel.removeAll();
+         leftPanel.removeAll();
+         rightPanel.validate();
+         leftPanel.validate();
+         
+         skipToEnd.setEnabled(false);  
+         
+          
  
       }
    }
