@@ -19,7 +19,7 @@ public class Card
       @param suit Suit of card, int
       @param rank Rank of card, int
    */   
-   public Card(int suit, int rank)
+   public Card(int rank, int suit)
    {
       this.rank=rank;
       this.suit=suit;
@@ -60,15 +60,15 @@ public class Card
    */
    public String getSuitString()
    {
-      String suitString;
+      String suitString="";
       
-      if (suit==1)
+      if (suit==SPADES)
          suitString="s";
-      else if (suit==2)
+      else if (suit==CLUBS)
          suitString="c";
-      else if (suit==3)
+      else if (suit==HEARTS)
          suitString="h";    
-      else
+      else if (suit==DIAMONDS)
          suitString="d"; 
       return suitString;       
    }   
@@ -81,7 +81,9 @@ public class Card
    {
       if (this!=null)
       {
-         JLabel label=new JLabel(new ImageIcon(this.getRank()+this.getSuitString()));
+         String s=this.getRank()+this.getSuitString()+".jpg";
+         ImageIcon i=new ImageIcon(s);
+         JLabel label=new JLabel(i);
          return label;
       }
       else
