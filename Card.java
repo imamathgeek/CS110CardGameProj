@@ -99,8 +99,56 @@ public class Card
    */      
    public JLabel showBack()
    {
-      JLabel label=new JLabel(new ImageIcon("back.jpg"));
-      return label;
+   
+      if (this!=null)
+      {
+         JLabel label=new JLabel(new ImageIcon("back.jpg"));
+         return label;      
+      }
+      else
+      {   
+         JLabel label=new JLabel(new ImageIcon());
+         return label;
+      } 
+      
+   }
+   
+      
+   /**
+      showCard() returns a ImageIcon with the image of the card on it
+      @reutrn ImageIcon
+   */   
+   public ImageIcon showCardIcon()
+   {
+      if (this!=null)
+      {
+         String s=this.getRank()+this.getSuitString()+".jpg";
+         ImageIcon i=new ImageIcon(s);
+         return i;
+      }
+      else
+      {
+         ImageIcon i=new ImageIcon();
+         return i;
+      }   
+   }
+   
+   /**
+      showBack() method shows the back of the card as ImageIcon
+      @return ImageIcon with back of the card
+   */      
+   public ImageIcon showBackIcon()
+   {
+      if (this!=null)
+      {
+         ImageIcon i=new ImageIcon("back.jpg");
+         return i;
+      }
+      else
+      {   
+         ImageIcon i=new ImageIcon();
+         return i;
+      }      
    }
   
 

@@ -83,7 +83,12 @@ public class WarGUI extends JFrame
       public void actionPerformed(ActionEvent e)
       {     
       
-         game.turn();
+         leftPanel.removeAll();
+         rightPanel.removeAll();
+         leftPanel.revalidate();
+         rightPanel.revalidate(); 
+         
+         int w=game.turn();
          
          Card p1=game.getPlayer1Card();
          Card p2=game.getPlayer2Card();
@@ -92,37 +97,34 @@ public class WarGUI extends JFrame
          Card p1War=game.getPlayer1CardWar();
          Card p2War=game.getPlayer2CardWar();
          
-         JLabel p1label=p1.showCard();
-         JLabel p2label=p2.showCard();
-         JLabel backlabel1=warDown1.showBack();
-         JLabel p1Warlabel=p1War.showCard();
-         JLabel backlabel2=warDown2.showBack();
-         JLabel p2Warlabel=p2War.showCard();
+     
          
-      
-         p1label.setIcon(null);
-         backlabel1.setIcon(null);
-         p1Warlabel.setIcon(null);
-         p2label.setIcon(null);
-         backlabel2.setIcon(null);
-         p2Warlabel.setIcon(null);
-         
-               
-         
-         leftPanel.add(p1label);
+         leftPanel.add(p1.showCard());
          if ((warDown1!=null) && (p1War!=null))
          {
-            leftPanel.add(backlabel1);
-            leftPanel.add(p1Warlabel);
+            leftPanel.add(warDown1.showBack());
+            leftPanel.add(p1War.showCard());
          }
          
          
-         rightPanel.add(p2label);
+         rightPanel.add(p2.showCard());
          if ((warDown1!=null) && (p1War!=null))
          {
-            rightPanel.add(backlabel2);
-            leftPanel.add(p2Warlabel);
+            rightPanel.add(warDown2.showBack());
+            rightPanel.add(p2War.showCard());
          }   
+         
+         moves.setText("Moves: "+game.getMoves());
+         
+         
+         if (w==1)
+            status.setText("Player 1 wins this round");
+         else if (w==2)
+            status.setText("Player 2 wins this round");
+         else if (w==3)
+            status.setText("Player 1 wins this war");
+         else if (w==4)
+            status.setText("Player 2 wins this war");         
 
          
          
