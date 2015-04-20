@@ -83,8 +83,6 @@ public class WarGUI extends JFrame
       public void actionPerformed(ActionEvent e)
       {     
       
-         
-                  
          game.turn();
          
          Card p1=game.getPlayer1Card();
@@ -95,11 +93,21 @@ public class WarGUI extends JFrame
          Card p2War=game.getPlayer2CardWar();
          
          JLabel p1label=p1.showCard();
+         JLabel p2label=p2.showCard();
          JLabel backlabel1=warDown1.showBack();
          JLabel p1Warlabel=p1War.showCard();
-         JLabel p2label=p2.showCard();
          JLabel backlabel2=warDown2.showBack();
          JLabel p2Warlabel=p2War.showCard();
+         
+      
+         p1label.setIcon(null);
+         backlabel1.setIcon(null);
+         p1Warlabel.setIcon(null);
+         p2label.setIcon(null);
+         backlabel2.setIcon(null);
+         p2Warlabel.setIcon(null);
+         
+               
          
          leftPanel.add(p1label);
          if ((warDown1!=null) && (p1War!=null))
@@ -143,6 +151,8 @@ public class WarGUI extends JFrame
             status.setText("Player 1 wins this game");
          else if (w==2)
             status.setText("Player 2 wins this game"); 
+            
+         skipToEnd.setEnabled(false);   
  
       }
    }
