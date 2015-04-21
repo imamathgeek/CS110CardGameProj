@@ -12,7 +12,7 @@ public class WarGUIDriver
    {
       JFrame frame = new WarGUI();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   frame.setSize(1000,500);
+	   frame.setSize(1000,550);
       frame.validate();
       frame.setVisible(true);
 

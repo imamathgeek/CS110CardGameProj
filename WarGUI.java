@@ -103,22 +103,22 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {     
-       //   for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
-//          {  
-//            // Component [] c=(leftPanel.getComponents()); //get all components and put them in array
-//             leftPanel.remove(i); //for each component setVisible to false
-//             leftPanel.repaint(); //repaint
-//             leftPanel.revalidate(); //revalidate
-// 
-//          }   
-//          for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
-//          {
-//            // Component [] c=(rightPanel.getComponents());//get all components and put them in array
-//             rightPanel.remove(i);//for each component setVisible to false
-//             rightPanel.repaint(); //repaint
-//             rightPanel.revalidate(); //revalidate
-// 
-//          }   
+         for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
+         {  
+            Component [] c=(leftPanel.getComponents()); //get all components and put them in array
+            c[i].setEnabled(false); //for each component setVisible to false
+            leftPanel.repaint(); //repaint
+            leftPanel.revalidate(); //revalidate
+
+         }   
+         for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
+         {
+            Component [] c=(rightPanel.getComponents());//get all components and put them in array
+            c[i].setEnabled(false);//for each component setVisible to false
+            rightPanel.repaint(); //repaint
+            rightPanel.revalidate(); //revalidate
+
+         }   
 
          //remove cards from right and left panel and revalidate and repaint
          rightPanel.removeAll();
@@ -129,9 +129,8 @@ public class WarGUI extends JFrame
          leftPanel.repaint();
 
          //create JLabels out of purple and blue "blank" cards
-         JLabel purple=new JLabel(new ImageIcon("purple.jpg"));
-         JLabel blue=new JLabel(new ImageIcon("blue.jpg"));
-         
+         ImageIcon purple=new ImageIcon("purple.jpg");
+         ImageIcon blue=new ImageIcon("blue.jpg");         
          
          int w=game.turn(); //do a turn and store the result as w
          
@@ -143,33 +142,92 @@ public class WarGUI extends JFrame
          Card p1War=game.getPlayer1CardWar();
          Card p2War=game.getPlayer2CardWar();
        
-     
-         //add card labels to panel if they exist
-         leftPanel.add(p1.showCard());
-        
+         //create all the JLabels
+         JLabel p1Label=p1.showCard("Regular Card Played",1);
+         JLabel p2Label=p2.showCard("Regular Card Played",1);
+         
+         //create empty labels for war cards
+         JLabel warDown1Label=new JLabel();
+         JLabel warDown2Label=new JLabel();
+         JLabel p1WarLabel=new JLabel();
+         JLabel p2WarLabel=new JLabel();
+         
+         //set war card icons to blue/purple
+         warDown1Label.setIcon(blue);
+         p1WarLabel.setIcon(blue);
+         warDown2Label.setIcon(purple);
+         p2WarLabel.setIcon(purple);
+         
+         //repaint and revalidate war cards
+         warDown1Label.repaint();
+         warDown1Label.revalidate();
+         warDown2Label.repaint();
+         warDown2Label.revalidate();
+         p1WarLabel.repaint();
+         p1WarLabel.revalidate();
+         p2WarLabel.repaint();
+         p2WarLabel.revalidate();
+         
          if ((warDown1!=null) && (p1War!=null))
          {
-            leftPanel.add(warDown1.showBack());
-            leftPanel.add(p1War.showCard());
-         }
-         else
-         {
-            leftPanel.add(blue);
-            leftPanel.add(blue);
-         }  
+            //create the card labels with actual card pictures
+            warDown1Label=warDown1.showBack("War Card Played face down");
+            p1WarLabel=p1War.showCard("War Card Played face up",2);
+            
+            warDown2Label=warDown2.showBack("War Card Played face down");
+            p2WarLabel=p2War.showCard("War Card Played face up",2);
+            
+            // warDown1Label.addMouseListener(new FlipCardMouseListener());
+//             warDown2Label.addMouseListener(new FlipCardMouseListener());
+         }   
+         
+         //set text to be at top
+         p1Label.setVerticalTextPosition(SwingConstants.TOP);
+         p2Label.setVerticalTextPosition(SwingConstants.TOP);
+         p1WarLabel.setVerticalTextPosition(SwingConstants.TOP);
+         p2WarLabel.setVerticalTextPosition(SwingConstants.TOP);
+         warDown1Label.setVerticalTextPosition(SwingConstants.TOP);
+         warDown2Label.setVerticalTextPosition(SwingConstants.TOP);
+     
+         //set text to be in center
+         p1Label.setHorizontalTextPosition(SwingConstants.CENTER);
+         p2Label.setHorizontalTextPosition(SwingConstants.CENTER);
+         p1WarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+         p2WarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+         warDown1Label.setHorizontalTextPosition(SwingConstants.CENTER);
+         warDown2Label.setHorizontalTextPosition(SwingConstants.CENTER);
+     
+     
+     
+         //add card labels to panel if they exist
+         leftPanel.add(p1Label);
+        //  if ((warDown1!=null) && (p1War!=null))
+//          {
+            leftPanel.add(warDown1Label);
+            leftPanel.add(p1WarLabel);
+      //    }
+        //  if (((warDown1==null) && (p1War==null)) || (p1WarLabel.getIcon()!=p1War.showCard("War Card Played face up",2)))
+//          {
+//             warDown1Label=blue1;
+//             p1WarLabel=blue2;
+//             leftPanel.add(warDown1Label);
+//             leftPanel.add(p1WarLabel);
+//          }  
          
          //add card labels to panel if they exist
-         rightPanel.add(p2.showCard());
-         if ((warDown2!=null) && (p2War!=null))
-         {
-            rightPanel.add(warDown2.showBack());
-            rightPanel.add(p2War.showCard());
-         }   
-         else
-         {
-            rightPanel.add(purple);
-            rightPanel.add(purple);
-         }  
+         rightPanel.add(p2Label);
+        //  if ((warDown2!=null) && (p2War!=null))
+//          {
+            rightPanel.add(warDown2Label);
+            rightPanel.add(p2WarLabel);
+      //    }   
+//          if (((warDown2==null) && (p2War==null)) || (p2WarLabel.getIcon()!=p2War.showCard("War Card Played face up",2)))
+//          {
+//             warDown2Label=purple1;
+//             p2WarLabel=purple2;
+//             rightPanel.add(warDown2Label);
+//             rightPanel.add(p2WarLabel);
+//          }  
          
          moves.setText("Moves: "+game.getMoves()); //update moves
          
@@ -251,6 +309,59 @@ public class WarGUI extends JFrame
       }
    }
    
+  //  private class FlipCardMouseListener implements MouseListener
+//    {
+//       public void mouseEntered(MouseEvent e)
+//       { 
+//          JLabel source=(JLabel)(e.getSource());
+//          
+//          if (source==(game.getPlayer1CardWarDown()).showBack("War card played face down"))
+//          {
+//             JLabel warDown1Label=((game.getPlayer1CardWarDown()).showCard("War card played face down",3));
+//             leftPanel.add(warDown1Label);
+//          }   
+//          else
+//          {
+//             JLabel warDown2Label=((game.getPlayer2CardWarDown()).showCard("War card played face down",3));
+//             rightPanel.add(warDown2Label);
+//          }   
+//          
+//       }
+//       
+//       public void mousePressed(MouseEvent e)
+//       {
+//       }
+//       
+//       public void mouseClicked(MouseEvent e)
+//       {
+//       }
+//       
+//       public void mouseReleased(MouseEvent e)
+//       {
+//                }
+//       
+//       public void mouseExited(MouseEvent e)
+//       {
+//                
+//          JLabel source=(JLabel)(e.getSource());
+//          
+//          
+//          if (source==(game.getPlayer1CardWarDown()).showBack("War card played face down"))
+//          {
+//             JLabel warDown1Label=((game.getPlayer1CardWarDown()).showBack("War card played face down"));
+//             leftPanel.add(warDown1Label);
+//          }   
+//          else
+//          {
+//             JLabel warDown2Label=((game.getPlayer2CardWarDown()).showBack("War card played face down"));
+//             rightPanel.add(warDown2Label);
+//          } 
+//          
+// 
+//       }
+// 
+//    }
+//    
    
 
 }
