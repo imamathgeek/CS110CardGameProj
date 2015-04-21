@@ -103,22 +103,30 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {     
-         for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
-         {  
-            Component [] c=(leftPanel.getComponents()); //get all components and put them in array
-            c[i].setVisible(false); //for each component setVisible to false
-            leftPanel.repaint(); //repaint
-            leftPanel.revalidate(); //revalidate
+    //      for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
+//          {  
+//             Component [] c=(leftPanel.getComponents()); //get all components and put them in array
+//             c[i].setVisible(false); //for each component setVisible to false
+//             leftPanel.repaint(); //repaint
+//             leftPanel.revalidate(); //revalidate
+// 
+//          }   
+//          for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
+//          {
+//             Component [] c=(rightPanel.getComponents());//get all components and put them in array
+//             c[i].setVisible(false);//for each component setVisible to false
+//             rightPanel.repaint(); //repaint
+//             rightPanel.revalidate(); //revalidate
+// 
+//          }   
 
-         }   
-         for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
-         {
-            Component [] c=(rightPanel.getComponents());//get all components and put them in array
-            c[i].setVisible(false);//for each component setVisible to false
-            rightPanel.repaint(); //repaint
-            rightPanel.revalidate(); //revalidate
-
-         }   
+         //remove cards from right and left panel and revalidate and repaint
+         rightPanel.removeAll();
+         leftPanel.removeAll();
+         rightPanel.revalidate();
+         leftPanel.revalidate();
+         rightPanel.repaint();
+         leftPanel.repaint();
 
          
          
