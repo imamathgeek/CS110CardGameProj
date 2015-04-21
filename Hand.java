@@ -73,7 +73,16 @@ public class Hand extends CardPile
       Card c=pile.get(0);
       pile.remove(0);
       return c;
-   }   
+   }  
+   
+   /**
+      size method returns the size of the hand
+      @return int
+   */
+   public int size()
+   {
+      return pile.size();
+   }       
    
    public static void main(String [] args)
    {

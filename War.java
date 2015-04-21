@@ -194,5 +194,23 @@ public class War
    {
       return p2War;
    } 
+   
+   /**
+      getCards1 method returns how many cards are in each player's hand
+      @return int
+   */
+   public int getCards1()
+   {
+      return hand1.size();
+   }   
+   
+   /**
+      getCards2 method returns how many cards are in each player's hand
+      @return int
+   */
+   public int getCards2()
+   {
+      return hand2.size();
+   }  
         
 }
