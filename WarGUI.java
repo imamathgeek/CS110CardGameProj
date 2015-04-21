@@ -103,18 +103,18 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {     
-    //      for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
+       //   for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
 //          {  
-//             Component [] c=(leftPanel.getComponents()); //get all components and put them in array
-//             c[i].setVisible(false); //for each component setVisible to false
+//            // Component [] c=(leftPanel.getComponents()); //get all components and put them in array
+//             leftPanel.remove(i); //for each component setVisible to false
 //             leftPanel.repaint(); //repaint
 //             leftPanel.revalidate(); //revalidate
 // 
 //          }   
 //          for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
 //          {
-//             Component [] c=(rightPanel.getComponents());//get all components and put them in array
-//             c[i].setVisible(false);//for each component setVisible to false
+//            // Component [] c=(rightPanel.getComponents());//get all components and put them in array
+//             rightPanel.remove(i);//for each component setVisible to false
 //             rightPanel.repaint(); //repaint
 //             rightPanel.revalidate(); //revalidate
 // 
@@ -128,7 +128,9 @@ public class WarGUI extends JFrame
          rightPanel.repaint();
          leftPanel.repaint();
 
-         
+         //create JLabels out of purple and blue "blank" cards
+         JLabel purple=new JLabel(new ImageIcon("purple.jpg"));
+         JLabel blue=new JLabel(new ImageIcon("blue.jpg"));
          
          
          int w=game.turn(); //do a turn and store the result as w
@@ -144,11 +146,17 @@ public class WarGUI extends JFrame
      
          //add card labels to panel if they exist
          leftPanel.add(p1.showCard());
+        
          if ((warDown1!=null) && (p1War!=null))
          {
             leftPanel.add(warDown1.showBack());
             leftPanel.add(p1War.showCard());
          }
+         else
+         {
+            leftPanel.add(blue);
+            leftPanel.add(blue);
+         }  
          
          //add card labels to panel if they exist
          rightPanel.add(p2.showCard());
@@ -157,6 +165,11 @@ public class WarGUI extends JFrame
             rightPanel.add(warDown2.showBack());
             rightPanel.add(p2War.showCard());
          }   
+         else
+         {
+            rightPanel.add(purple);
+            rightPanel.add(purple);
+         }  
          
          moves.setText("Moves: "+game.getMoves()); //update moves
          
