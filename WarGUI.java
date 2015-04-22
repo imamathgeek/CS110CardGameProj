@@ -106,7 +106,7 @@ public class WarGUI extends JFrame
          for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
          {  
             Component [] c=(leftPanel.getComponents()); //get all components and put them in array
-            c[i].setEnabled(false); //for each component setVisible to false
+            c[i].setVisible(false); //for each component setVisible to false
             leftPanel.repaint(); //repaint
             leftPanel.revalidate(); //revalidate
 
@@ -114,7 +114,7 @@ public class WarGUI extends JFrame
          for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
          {
             Component [] c=(rightPanel.getComponents());//get all components and put them in array
-            c[i].setEnabled(false);//for each component setVisible to false
+            c[i].setVisible(false);//for each component setVisible to false
             rightPanel.repaint(); //repaint
             rightPanel.revalidate(); //revalidate
 
@@ -151,12 +151,12 @@ public class WarGUI extends JFrame
          JLabel warDown2Label=new JLabel();
          JLabel p1WarLabel=new JLabel();
          JLabel p2WarLabel=new JLabel();
-         
-         //set war card icons to blue/purple
-         warDown1Label.setIcon(blue);
-         p1WarLabel.setIcon(blue);
-         warDown2Label.setIcon(purple);
-         p2WarLabel.setIcon(purple);
+        //  
+//          //setvisible of war card to false
+//          warDown1Label.setVisible(false);
+//          p1WarLabel.setVisible(false);
+//          warDown2Label.setVisible(false);
+//          p2WarLabel.setVisible(false);
          
          //repaint and revalidate war cards
          warDown1Label.repaint();
@@ -170,12 +170,19 @@ public class WarGUI extends JFrame
          
          if ((warDown1!=null) && (p1War!=null))
          {
-            //create the card labels with actual card pictures
-            warDown1Label=warDown1.showBack("War Card Played face down");
-            p1WarLabel=p1War.showCard("War Card Played face up",2);
+            //set icons of war cards to actual card pix
+            warDown1Label.setIcon(warDown1.showBackIcon());
+            p1WarLabel.setIcon(p1War.showCardIcon());
             
-            warDown2Label=warDown2.showBack("War Card Played face down");
-            p2WarLabel=p2War.showCard("War Card Played face up",2);
+            warDown2Label.setIcon(warDown2.showBackIcon());
+            p2WarLabel.setIcon(p2War.showCardIcon());
+            
+            //set visible to true
+            warDown1Label.setVisible(true);
+            p1WarLabel.setVisible(true);
+            warDown2Label.setVisible(true);
+            p2WarLabel.setVisible(true);            
+            
             
             // warDown1Label.addMouseListener(new FlipCardMouseListener());
 //             warDown2Label.addMouseListener(new FlipCardMouseListener());
