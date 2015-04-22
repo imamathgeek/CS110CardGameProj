@@ -103,23 +103,8 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {     
-         for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
-         {  
-            Component [] c=(leftPanel.getComponents()); //get all components and put them in array
-            c[i].setVisible(false); //for each component setVisible to false
-            leftPanel.repaint(); //repaint
-            leftPanel.revalidate(); //revalidate
-
-         }   
-         for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
-         {
-            Component [] c=(rightPanel.getComponents());//get all components and put them in array
-            c[i].setVisible(false);//for each component setVisible to false
-            rightPanel.repaint(); //repaint
-            rightPanel.revalidate(); //revalidate
-
-         }   
-
+      
+      
          //remove cards from right and left panel and revalidate and repaint
          rightPanel.removeAll();
          leftPanel.removeAll();
@@ -127,12 +112,10 @@ public class WarGUI extends JFrame
          leftPanel.revalidate();
          rightPanel.repaint();
          leftPanel.repaint();
-
-         //create JLabels out of purple and blue "blank" cards
-         ImageIcon purple=new ImageIcon("purple.jpg");
-         ImageIcon blue=new ImageIcon("blue.jpg");         
          
-         int w=game.turn(); //do a turn and store the result as w
+            
+         //do a turn and store the winner of the round as w
+         int w=game.turn();
          
          //store each of the cards for the turn, last 4 are null if it's not a war turn
          Card p1=game.getPlayer1Card();
@@ -141,7 +124,8 @@ public class WarGUI extends JFrame
          Card warDown2=game.getPlayer2CardWarDown();
          Card p1War=game.getPlayer1CardWar();
          Card p2War=game.getPlayer2CardWar();
-       
+          
+            
          //create all the JLabels
          JLabel p1Label=p1.showCard("Regular Card Played",1);
          JLabel p2Label=p2.showCard("Regular Card Played",1);
@@ -151,39 +135,16 @@ public class WarGUI extends JFrame
          JLabel warDown2Label=new JLabel();
          JLabel p1WarLabel=new JLabel();
          JLabel p2WarLabel=new JLabel();
-        //  
-//          //setvisible of war card to false
-//          warDown1Label.setVisible(false);
-//          p1WarLabel.setVisible(false);
-//          warDown2Label.setVisible(false);
-//          p2WarLabel.setVisible(false);
-         
-         //repaint and revalidate war cards
-         warDown1Label.repaint();
-         warDown1Label.revalidate();
-         warDown2Label.repaint();
-         warDown2Label.revalidate();
-         p1WarLabel.repaint();
-         p1WarLabel.revalidate();
-         p2WarLabel.repaint();
-         p2WarLabel.revalidate();
-         
-         if ((warDown1!=null) && (p1War!=null))
+
+
+         if ((warDown1!=null) && (p1War!=null) && (warDown2!=null) && (p2War!=null))
          {
             //set icons of war cards to actual card pix
-            warDown1Label.setIcon(warDown1.showBackIcon());
-            p1WarLabel.setIcon(p1War.showCardIcon());
-            
-            warDown2Label.setIcon(warDown2.showBackIcon());
-            p2WarLabel.setIcon(p2War.showCardIcon());
-            
-            //set visible to true
-            warDown1Label.setVisible(true);
-            p1WarLabel.setVisible(true);
-            warDown2Label.setVisible(true);
-            p2WarLabel.setVisible(true);            
-            
-            
+            warDown1Label=warDown1.showBack("War Card Played Face Down");
+            p1WarLabel=(p1War.showCard("War Card Played Face Up",2));
+            warDown2Label=(warDown2.showBack("War Card Played Face Down"));
+            p2WarLabel=p2War.showCard("War Card Played Face Up",2);           
+         
             // warDown1Label.addMouseListener(new FlipCardMouseListener());
 //             warDown2Label.addMouseListener(new FlipCardMouseListener());
          }   
@@ -203,38 +164,24 @@ public class WarGUI extends JFrame
          p2WarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
          warDown1Label.setHorizontalTextPosition(SwingConstants.CENTER);
          warDown2Label.setHorizontalTextPosition(SwingConstants.CENTER);
-     
-     
-     
+         
          //add card labels to panel if they exist
          leftPanel.add(p1Label);
-        //  if ((warDown1!=null) && (p1War!=null))
-//          {
+         if ((warDown1!=null) && (p1War!=null))
+         {
             leftPanel.add(warDown1Label);
             leftPanel.add(p1WarLabel);
-      //    }
-        //  if (((warDown1==null) && (p1War==null)) || (p1WarLabel.getIcon()!=p1War.showCard("War Card Played face up",2)))
-//          {
-//             warDown1Label=blue1;
-//             p1WarLabel=blue2;
-//             leftPanel.add(warDown1Label);
-//             leftPanel.add(p1WarLabel);
-//          }  
+         }
+   
          
          //add card labels to panel if they exist
          rightPanel.add(p2Label);
-        //  if ((warDown2!=null) && (p2War!=null))
-//          {
+         if ((warDown2!=null) && (p2War!=null))
+         {
             rightPanel.add(warDown2Label);
             rightPanel.add(p2WarLabel);
-      //    }   
-//          if (((warDown2==null) && (p2War==null)) || (p2WarLabel.getIcon()!=p2War.showCard("War Card Played face up",2)))
-//          {
-//             warDown2Label=purple1;
-//             p2WarLabel=purple2;
-//             rightPanel.add(warDown2Label);
-//             rightPanel.add(p2WarLabel);
-//          }  
+         }   
+  
          
          moves.setText("Moves: "+game.getMoves()); //update moves
          
@@ -254,13 +201,164 @@ public class WarGUI extends JFrame
          numCards1.setText("Player 1 has "+game.getCards1());
          numCards2.setText("Player 2 has "+game.getCards2());
          
-         //repaint and revalidate
-         leftPanel.revalidate();
-         rightPanel.revalidate();
-         leftPanel.repaint();
-         rightPanel.repaint();
+
          
          
+         // Component [] l=(leftPanel.getComponents()); //get all components and put them in array
+// 
+//          for (int i=0;i<leftPanel.getComponentCount();i++) //for however many components there are
+//          {  
+//             l[i].setVisible(false); //for each component setVisible to false
+//             leftPanel.repaint(); //repaint
+//             leftPanel.revalidate(); //revalidate
+// 
+//          }
+//          
+//          Component [] r=(rightPanel.getComponents());//get all components and put them in array
+//          
+//          for (int i=0;i<rightPanel.getComponentCount();i++)//for however many components there are
+//          {
+//             r[i].setVisible(false);//for each component setVisible to false
+//             rightPanel.repaint(); //repaint
+//             rightPanel.revalidate(); //revalidate
+// 
+//          }   
+// 
+//          
+// 
+//          //create JLabels out of purple and blue "blank" cards
+//          ImageIcon purple=new ImageIcon("purple.jpg");
+//          ImageIcon blue=new ImageIcon("blue.jpg");         
+//          
+//          int w=game.turn(); //do a turn and store the result as w
+//          
+//          //store each of the cards for the turn, last 4 are null if it's not a war turn
+//          Card p1=game.getPlayer1Card();
+//          Card p2=game.getPlayer2Card();
+//          Card warDown1=game.getPlayer1CardWarDown();
+//          Card warDown2=game.getPlayer2CardWarDown();
+//          Card p1War=game.getPlayer1CardWar();
+//          Card p2War=game.getPlayer2CardWar();
+//        
+//          //create all the JLabels
+//          JLabel p1Label=p1.showCard("Regular Card Played",1);
+//          JLabel p2Label=p2.showCard("Regular Card Played",1);
+//          
+//          //create empty labels for war cards
+//          JLabel warDown1Label=new JLabel();
+//          JLabel warDown2Label=new JLabel();
+//          JLabel p1WarLabel=new JLabel();
+//          JLabel p2WarLabel=new JLabel();
+//         //  
+// //          //setvisible of war card to false
+// //          warDown1Label.setVisible(false);
+// //          p1WarLabel.setVisible(false);
+// //          warDown2Label.setVisible(false);
+// //          p2WarLabel.setVisible(false);
+//          
+//          //repaint and revalidate war cards
+//          warDown1Label.repaint();
+//          warDown1Label.revalidate();
+//          warDown2Label.repaint();
+//          warDown2Label.revalidate();
+//          p1WarLabel.repaint();
+//          p1WarLabel.revalidate();
+//          p2WarLabel.repaint();
+//          p2WarLabel.revalidate();
+//          
+//          if ((warDown1!=null) && (p1War!=null))
+//          {
+//             //set icons of war cards to actual card pix
+//             warDown1Label.setIcon(warDown1.showBackIcon());
+//             p1WarLabel.setIcon(p1War.showCardIcon());
+//             
+//             warDown2Label.setIcon(warDown2.showBackIcon());
+//             p2WarLabel.setIcon(p2War.showCardIcon());
+//             
+//             //set visible to true
+//             warDown1Label.setVisible(true);
+//             p1WarLabel.setVisible(true);
+//             warDown2Label.setVisible(true);
+//             p2WarLabel.setVisible(true);            
+//             
+//             
+//             // warDown1Label.addMouseListener(new FlipCardMouseListener());
+// //             warDown2Label.addMouseListener(new FlipCardMouseListener());
+//          }   
+//          
+//          //set text to be at top
+//          p1Label.setVerticalTextPosition(SwingConstants.TOP);
+//          p2Label.setVerticalTextPosition(SwingConstants.TOP);
+//          p1WarLabel.setVerticalTextPosition(SwingConstants.TOP);
+//          p2WarLabel.setVerticalTextPosition(SwingConstants.TOP);
+//          warDown1Label.setVerticalTextPosition(SwingConstants.TOP);
+//          warDown2Label.setVerticalTextPosition(SwingConstants.TOP);
+//      
+//          //set text to be in center
+//          p1Label.setHorizontalTextPosition(SwingConstants.CENTER);
+//          p2Label.setHorizontalTextPosition(SwingConstants.CENTER);
+//          p1WarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+//          p2WarLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+//          warDown1Label.setHorizontalTextPosition(SwingConstants.CENTER);
+//          warDown2Label.setHorizontalTextPosition(SwingConstants.CENTER);
+//      
+//      
+//      
+//          //add card labels to panel if they exist
+//          leftPanel.add(p1Label);
+//         //  if ((warDown1!=null) && (p1War!=null))
+// //          {
+//             leftPanel.add(warDown1Label);
+//             leftPanel.add(p1WarLabel);
+//       //    }
+//         //  if (((warDown1==null) && (p1War==null)) || (p1WarLabel.getIcon()!=p1War.showCard("War Card Played face up",2)))
+// //          {
+// //             warDown1Label=blue1;
+// //             p1WarLabel=blue2;
+// //             leftPanel.add(warDown1Label);
+// //             leftPanel.add(p1WarLabel);
+// //          }  
+//          
+//          //add card labels to panel if they exist
+//          rightPanel.add(p2Label);
+//         //  if ((warDown2!=null) && (p2War!=null))
+// //          {
+//             rightPanel.add(warDown2Label);
+//             rightPanel.add(p2WarLabel);
+//       //    }   
+// //          if (((warDown2==null) && (p2War==null)) || (p2WarLabel.getIcon()!=p2War.showCard("War Card Played face up",2)))
+// //          {
+// //             warDown2Label=purple1;
+// //             p2WarLabel=purple2;
+// //             rightPanel.add(warDown2Label);
+// //             rightPanel.add(p2WarLabel);
+// //          }  
+//          
+//          moves.setText("Moves: "+game.getMoves()); //update moves
+//          
+//          
+//          //decide who wins round and update status with the corresponding text
+//          if (w==1)
+//             status.setText("Player 1 wins this round");
+//          else if (w==2)
+//             status.setText("Player 2 wins this round");
+//          else if (w==3)
+//             status.setText("Player 1 wins this war");
+//          else if (w==4)
+//             status.setText("Player 2 wins this war");         
+// 
+// 
+//          //update how many cards each player has in their hands
+//          numCards1.setText("Player 1 has "+game.getCards1());
+//          numCards2.setText("Player 2 has "+game.getCards2());
+//          
+//          //repaint and revalidate
+//          leftPanel.revalidate();
+//          rightPanel.revalidate();
+//          leftPanel.repaint();
+//          rightPanel.repaint();
+//          
+//          
                           
       
       }

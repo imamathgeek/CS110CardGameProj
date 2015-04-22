@@ -8,7 +8,7 @@ import java.util.*;
 public class Hand extends CardPile
 {
    //instance vars
-   private static Deck deck;
+   private static final Deck deck=new Deck();
    private CardPile pile;
    
       
@@ -17,7 +17,6 @@ public class Hand extends CardPile
    */
    public Hand(int num)
    {
-      deck=new Deck(); //create deck
       
       pile=new CardPile(); //create pile
       
