@@ -16,7 +16,7 @@ public class WarGUI extends JFrame
    private JButton skipToEnd;    //button to skip to end
    private JLabel moves;  // num of moves
    private JLabel title1,status,numCards1,numCards2;   //title and status
-   private JLabel p1Label,p2Label,warDown1Label,warDown2Label,p1WarLabel,p2WarLabel;//labels with card images
+   private JLabel p1Label,p2Label,warDown1Label,warDown2Label,p1WarLabel,p2WarLabel,warDown1dLabel,warDown2dLabel,p1dWarLabel,p2dWarLabel,warDown1tLabel,warDown2tLabel,p1tWarLabel,p2tWarLabel;//labels with card images
    private ImageIcon blue,purple; //blank JLabels colored as background
    
    
@@ -66,6 +66,16 @@ public class WarGUI extends JFrame
       warDown2Label=new JLabel("War Card Played Face Down",purple,JLabel.CENTER);
       p1WarLabel=new JLabel("War Card Played Face Up",blue,JLabel.RIGHT);
       p2WarLabel=new JLabel("War Card Played Face Up",purple,JLabel.RIGHT);
+      warDown1dLabel=new JLabel("Double War Card Played Face Down",blue,JLabel.CENTER);
+      warDown2dLabel=new JLabel("Double War Card Played Face Down",purple,JLabel.CENTER);
+      p1dWarLabel=new JLabel("Double War Card Played Face Up",blue,JLabel.RIGHT);
+      p2dWarLabel=new JLabel("Double War Card Played Face Up",purple,JLabel.RIGHT);
+      warDown1tLabel=new JLabel("Triple War Card Played Face Down",blue,JLabel.CENTER);
+      warDown2tLabel=new JLabel("Triple War Card Played Face Down",purple,JLabel.CENTER);
+      p1tWarLabel=new JLabel("Triple War Card Played Face Up",blue,JLabel.RIGHT);
+      p2tWarLabel=new JLabel("Triple War Card Played Face Up",purple,JLabel.RIGHT);
+
+      
               
               
       title1 = new JLabel("Rachel's Game of War:"); //add title
@@ -134,18 +144,58 @@ public class WarGUI extends JFrame
          Card warDown2=null;
          Card p1War=null;
          Card p2War=null;
+         Card p1dWar=null;
+         Card p2dWar=null;
+         Card warDown1d=null;
+         Card warDown2d=null;
+         Card p1tWar=null;
+         Card p2tWar=null;
+         Card warDown1t=null;
+         Card warDown2t=null;
 
          
          //store each of the cards for the turn, last 4 are null if it's not a war turn
          Card p1=game.getPlayer1Card();
          Card p2=game.getPlayer2Card();
-         if ((w==3) || (w==4))
+         if ((w==3) || (w==4)) //single war turn
          {
             warDown1=game.getPlayer1CardWarDown();
             warDown2=game.getPlayer2CardWarDown();
             p1War=game.getPlayer1CardWar();
             p2War=game.getPlayer2CardWar();
          }   
+         
+         
+         if ((w==5) || (w==6)) //double war turn
+         {
+            warDown1=game.getPlayer1CardWarDown();
+            warDown2=game.getPlayer2CardWarDown();
+            p1War=game.getPlayer1CardWar();
+            p2War=game.getPlayer2CardWar();
+            warDown1d=game.getPlayer1CardDWarDown();
+            warDown2d=game.getPlayer2CardDWarDown();
+            p1dWar=game.getPlayer1CardDWar();
+            p2dWar=game.getPlayer2CardDWar();
+            
+         }   
+         
+          if ((w==7) || (w==8)) //triple war turn
+         {
+            warDown1=game.getPlayer1CardWarDown();
+            warDown2=game.getPlayer2CardWarDown();
+            p1War=game.getPlayer1CardWar();
+            p2War=game.getPlayer2CardWar();
+            warDown1d=game.getPlayer1CardDWarDown();
+            warDown2d=game.getPlayer2CardDWarDown();
+            p1dWar=game.getPlayer1CardDWar();
+            p2dWar=game.getPlayer2CardDWar();
+            warDown1t=game.getPlayer1CardTWarDown();
+            warDown2t=game.getPlayer2CardTWarDown();
+            p1tWar=game.getPlayer1CardTWar();
+            p2tWar=game.getPlayer2CardTWar();
+         }   
+
+
           
             
          //create all the JLabels
@@ -155,17 +205,43 @@ public class WarGUI extends JFrame
          
 
 
-         if ((warDown1!=null) && (p1War!=null) && (warDown2!=null) && (p2War!=null))
+      
+         //set icons of war cards to actual card pix
+         if ((w>=3))
          {
-            //set icons of war cards to actual card pix
             warDown1Label.setIcon(warDown1.showBackIcon());
             p1WarLabel.setIcon(p1War.showCardIcon());
             warDown2Label.setIcon(warDown2.showBackIcon());
-            p2WarLabel.setIcon(p2War.showCardIcon());           
-         
-            warDown1Label.addMouseListener(new FlipCardMouseListener());
-            warDown2Label.addMouseListener(new FlipCardMouseListener());
+            p2WarLabel.setIcon(p2War.showCardIcon()); 
+            
+            if (w>=5)
+            {
+               warDown1dLabel.setIcon(warDown1d.showBackIcon());
+               p1dWarLabel.setIcon(p1dWar.showCardIcon());
+               warDown2dLabel.setIcon(warDown2d.showBackIcon());
+               p2dWarLabel.setIcon(p2dWar.showCardIcon());
+               
+               if (w>=7)
+               {
+                  warDown1tLabel.setIcon(warDown1t.showBackIcon());
+                  p1tWarLabel.setIcon(p1tWar.showCardIcon());
+                  warDown2tLabel.setIcon(warDown2t.showBackIcon());
+                  p2tWarLabel.setIcon(p2tWar.showCardIcon()); 
+               }
+            }
+            
          }   
+         
+          
+                
+      
+         warDown1Label.addMouseListener(new FlipCardMouseListener());
+         warDown2Label.addMouseListener(new FlipCardMouseListener());
+         warDown1dLabel.addMouseListener(new FlipCardMouseListener());
+         warDown2dLabel.addMouseListener(new FlipCardMouseListener());
+         warDown1tLabel.addMouseListener(new FlipCardMouseListener());
+         warDown2tLabel.addMouseListener(new FlipCardMouseListener());
+          
          
          //set text to be at top
          p1Label.setVerticalTextPosition(SwingConstants.TOP);
@@ -189,6 +265,18 @@ public class WarGUI extends JFrame
          {
             leftPanel.add(warDown1Label);
             leftPanel.add(p1WarLabel);
+            
+            if ((warDown1d!=null) && (p1dWar!=null))
+            {
+               leftPanel.add(warDown1dLabel);
+               leftPanel.add(p1dWarLabel);
+               
+               if ((warDown1t!=null) && (p1tWar!=null))
+               {
+               leftPanel.add(warDown1tLabel);
+               leftPanel.add(p1tWarLabel);
+               }
+            }
          }
    
          
@@ -198,6 +286,18 @@ public class WarGUI extends JFrame
          {
             rightPanel.add(warDown2Label);
             rightPanel.add(p2WarLabel);
+            
+            if ((warDown2d!=null) && (p2dWar!=null))
+            {
+               rightPanel.add(warDown2dLabel);
+               rightPanel.add(p2dWarLabel);
+               
+               if ((warDown2t!=null) && (p2tWar!=null))
+               {
+                  rightPanel.add(warDown2tLabel);
+                  rightPanel.add(p2tWarLabel);
+               }
+            }
          }   
   
          
@@ -212,8 +312,22 @@ public class WarGUI extends JFrame
          else if (w==3)
             status.setText("Player 1 wins this war");
          else if (w==4)
-            status.setText("Player 2 wins this war");         
-
+            status.setText("Player 2 wins this war");
+         else if (w==5)
+            status.setText("Player 1 wins this double war"); 
+         else if (w==6)
+            status.setText("Player 2 wins this double war");
+         else if (w==7)
+            status.setText("Player 1 wins this triple war");
+         else if (w==8)
+            status.setText("Player 2 wins this triple war"); 
+         else if (w==9)
+         {
+            status.setText(""); 
+            moves.setText("Quadruple war. Error.");
+            playCard.setEnabled(false);
+            skipToEnd.setEnabled(false);           
+         }
 
          //update how many cards each player has in their hands
          numCards1.setText("Player 1 has "+game.getCards1());
@@ -280,7 +394,7 @@ public class WarGUI extends JFrame
       { 
          JLabel source=(JLabel)(e.getSource()); //get source
          
-         if (source==warDown1Label) //if mouse if over the left face down card
+         if ((source==warDown1Label) || (source==warDown1dLabel) || (source==warDown1tLabel)) //if mouse if over the left face down card
          {
             warDown1Label.setIcon((game.getPlayer1CardWarDown()).showCardIcon()); //flip it
          }   
@@ -309,7 +423,7 @@ public class WarGUI extends JFrame
          JLabel source=(JLabel)(e.getSource()); //get source
          
          
-         if (source==warDown1Label) //if mouse if exiting warDown1Label
+         if ((source==warDown1Label) || (source==warDown1dLabel) || (source==warDown1tLabel)) //if mouse if exiting warDown1Label
          {
             warDown1Label.setIcon((game.getPlayer1CardWarDown()).showBackIcon()); //flip it back
          }   

@@ -9,7 +9,7 @@ public class War
    //instance vars
    private Hand hand1, hand2;
    private int moves;
-   private Card p1, p2, warDown1, warDown2, p1War, p2War;
+   private Card p1, p2, warDown1, warDown2, p1War, p2War,p1dWar,p2dWar,warDown1d,warDown2d,p1tWar,p2tWar,warDown1t,warDown2t;
    public static final int START_HAND=26;
    
    public War()
@@ -104,7 +104,7 @@ public class War
          }
          else
          {
-            return war();
+            return doubleWar();
          }
       }
       catch (StackOverflowError e)
@@ -115,6 +115,137 @@ public class War
 
    }
    
+   /**
+      doubleWar method is when there's a double war
+      @return int 5 if p1 wins 6 if p2 wins
+   */
+   public int doubleWar()
+   {
+      
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
+         getWinner();
+      else   
+      {
+         //deal one card each face down
+         warDown1d=hand1.dealCard();
+         warDown2d=hand2.dealCard();
+      }   
+      
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
+         getWinner();
+      else   
+      {
+         //deal next card face up
+         p1dWar=hand1.dealCard();
+         p2dWar=hand2.dealCard();
+      }   
+
+        
+      
+      if ((p1dWar.compareTo(p2dWar))>0) //player 1 wins round
+      {
+         hand1.addBottom(p1); //add p1 card to bottom of hand 1
+         hand1.addBottom(p2); //add p2 card to bottom of hand 1
+         hand1.addBottom(warDown1); //add warDown1 to bottom of hand 1
+         hand1.addBottom(warDown2); //add warDown2 to bottom of hand 1
+         hand1.addBottom(p1War); //add p1War to bottom of hand 1
+         hand1.addBottom(p2War); //add p2War to bottom of hand 1
+         hand1.addBottom(warDown1d); //add warDown1d to bottom of hand 1
+         hand1.addBottom(warDown2d); //add warDown2d to bottom of hand 1
+         hand1.addBottom(p1dWar); //add p1dWar to bottom of hand 1
+         hand1.addBottom(p2dWar); //add p2dWar to bottom of hand 1
+         return 5;      
+      }
+      else if ((p1dWar.compareTo(p2dWar))<0) //player 2 wins round
+      {
+         hand2.addBottom(p1); //add p1 card to bottom of hand 2
+         hand2.addBottom(p2); //add p2 card to bottom of hand 2
+         hand2.addBottom(warDown1); //add warDown1 to bottom of hand 2
+         hand2.addBottom(warDown2); //add warDown2 to bottom of hand 2
+         hand2.addBottom(p1War); //add p1War to bottom of hand 2
+         hand2.addBottom(p2War); //add p2War to bottom of hand 2
+         hand1.addBottom(warDown1d); //add warDown1d to bottom of hand 2
+         hand1.addBottom(warDown2d); //add warDown2d to bottom of hand 2
+         hand1.addBottom(p1dWar); //add p1dWar to bottom of hand 2
+         hand1.addBottom(p2dWar); //add p2dWar to bottom of hand 2
+
+         return 6;
+      }
+      else
+      {
+         return tripleWar();
+      }
+   }
+   
+   /**
+      tripleWar() simulates a triple war
+      @return int 7 if p1 wins 8 if p2 wins
+   */
+   public int tripleWar()
+   {
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
+         getWinner();
+      else   
+      {
+         //deal one card each face down
+         warDown1t=hand1.dealCard();
+         warDown2t=hand2.dealCard();
+      }   
+      
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
+         getWinner();
+      else   
+      {
+         //deal next card face up
+         p1tWar=hand1.dealCard();
+         p2tWar=hand2.dealCard();
+      }   
+
+        
+      
+      if ((p1tWar.compareTo(p2tWar))>0) //player 1 wins round
+      {
+         hand1.addBottom(p1); //add p1 card to bottom of hand 1
+         hand1.addBottom(p2); //add p2 card to bottom of hand 1
+         hand1.addBottom(warDown1); //add warDown1 to bottom of hand 1
+         hand1.addBottom(warDown2); //add warDown2 to bottom of hand 1
+         hand1.addBottom(p1War); //add p1War to bottom of hand 1
+         hand1.addBottom(p2War); //add p2War to bottom of hand 1
+         hand1.addBottom(warDown1d); //add warDown1d to bottom of hand 1
+         hand1.addBottom(warDown2d); //add warDown2d to bottom of hand 1
+         hand1.addBottom(p1dWar); //add p1dWar to bottom of hand 1
+         hand1.addBottom(p2dWar); //add p2dWar to bottom of hand 1
+         hand1.addBottom(warDown1t); //add warDown1d to bottom of hand 1
+         hand1.addBottom(warDown2t); //add warDown2d to bottom of hand 1
+         hand1.addBottom(p1tWar); //add p1dWar to bottom of hand 1
+         hand1.addBottom(p2tWar); //add p2dWar to bottom of hand 1
+         return 7;      
+      }
+      else if ((p1tWar.compareTo(p2tWar))<0) //player 2 wins round
+      {
+         hand2.addBottom(p1); //add p1 card to bottom of hand 2
+         hand2.addBottom(p2); //add p2 card to bottom of hand 2
+         hand2.addBottom(warDown1); //add warDown1 to bottom of hand 2
+         hand2.addBottom(warDown2); //add warDown2 to bottom of hand 2
+         hand2.addBottom(p1War); //add p1War to bottom of hand 2
+         hand2.addBottom(p2War); //add p2War to bottom of hand 2
+         hand1.addBottom(warDown1d); //add warDown1d to bottom of hand 2
+         hand1.addBottom(warDown2d); //add warDown2d to bottom of hand 2
+         hand1.addBottom(p1dWar); //add p1dWar to bottom of hand 2
+         hand1.addBottom(p2dWar); //add p2dWar to bottom of hand 2
+         hand1.addBottom(warDown1t); //add warDown1d to bottom of hand 2
+         hand1.addBottom(warDown2t); //add warDown2d to bottom of hand 2
+         hand1.addBottom(p1tWar); //add p1dWar to bottom of hand 2
+         hand1.addBottom(p2tWar); //add p2dWar to bottom of hand 2
+
+         return 8;
+      }
+      else
+      {
+         return 9;
+      }
+   }   
+         
    /**
       getMoves returns the number of moves so far
       @return int moves
@@ -196,6 +327,79 @@ public class War
    } 
    
    /**
+      getPlayer1CardDWar method returns player1's double war card
+      @return Card c
+   */
+   public Card getPlayer1CardDWar()
+   {
+      return p1dWar;
+   }  
+   
+   /**
+      getPlayer2CardDWar method returns player2's double war card
+      @return Card c
+   */
+   public Card getPlayer2CardDWar()
+   {
+      return p2dWar;
+   }  
+   
+   /**
+      getPlayer1CardDWarDown method returns player1's double war down card
+      @return Card c
+   */
+   public Card getPlayer1CardDWarDown()
+   {
+      return warDown1d;
+   }  
+   
+   /**
+      getPlayer2CardDWarDown method returns player2's double war down card
+      @return Card c
+   */
+   public Card getPlayer2CardDWarDown()
+   {
+      return warDown2d;
+   }  
+   
+   /**
+      getPlayer1CardTWar method returns player1's double war card
+      @return Card c
+   */
+   public Card getPlayer1CardTWar()
+   {
+      return p1tWar;
+   }  
+   
+   /**
+      getPlayer2CardTWar method returns player2's double war card
+      @return Card c
+   */
+   public Card getPlayer2CardTWar()
+   {
+      return p2tWar;
+   }  
+   
+   /**
+      getPlayer1CardTWarDown method returns player1's double war down card
+      @return Card c
+   */
+   public Card getPlayer1CardTWarDown()
+   {
+      return warDown1t;
+   }  
+   
+   /**
+      getPlayer2CardTWarDown method returns player2's double war down card
+      @return Card c
+   */
+   public Card getPlayer2CardTWarDown()
+   {
+      return warDown2t;
+   } 
+
+   
+   /**
       getCards1 method returns how many cards are in each player's hand
       @return int
    */
@@ -212,5 +416,6 @@ public class War
    {
       return hand2.size();
    }  
+   
         
 }
