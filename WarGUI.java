@@ -274,19 +274,19 @@ public class WarGUI extends JFrame
       }
    }
    
-   private class FlipCardMouseListener implements MouseListener
+   private class FlipCardMouseListener implements MouseListener //flips middle face down war card
    {
       public void mouseEntered(MouseEvent e)
       { 
-         JLabel source=(JLabel)(e.getSource());
+         JLabel source=(JLabel)(e.getSource()); //get source
          
-         if (source==warDown1Label)
+         if (source==warDown1Label) //if mouse if over the left face down card
          {
-            warDown1Label.setIcon((game.getPlayer1CardWarDown()).showCardIcon());
+            warDown1Label.setIcon((game.getPlayer1CardWarDown()).showCardIcon()); //flip it
          }   
-         else
+         else //otherwise mouse if over right face down card
          {
-            warDown2Label.setIcon((game.getPlayer2CardWarDown()).showCardIcon());
+            warDown2Label.setIcon((game.getPlayer2CardWarDown()).showCardIcon()); //flip it
          }   
          
       }
@@ -301,21 +301,21 @@ public class WarGUI extends JFrame
       
       public void mouseReleased(MouseEvent e)
       {
-               }
+      }
       
       public void mouseExited(MouseEvent e)
       {
                
-         JLabel source=(JLabel)(e.getSource());
+         JLabel source=(JLabel)(e.getSource()); //get source
          
          
-         if (source==warDown1Label)
+         if (source==warDown1Label) //if mouse if exiting warDown1Label
          {
-            warDown1Label.setIcon((game.getPlayer1CardWarDown()).showBackIcon());
+            warDown1Label.setIcon((game.getPlayer1CardWarDown()).showBackIcon()); //flip it back
          }   
-         else
+         else //otherwise
          {
-            warDown2Label.setIcon((game.getPlayer2CardWarDown()).showBackIcon());
+            warDown2Label.setIcon((game.getPlayer2CardWarDown()).showBackIcon()); //flip it back
          } 
          
 
