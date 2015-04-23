@@ -229,12 +229,12 @@ public class WarGUI extends JFrame
       {  
       
          //while there is no winner and while moves is less than an unreasonable number of terms   
-         while ((game.getWinner()==0) && (game.getMoves()<3000))
+         while ((game.getWinner()==0) && (game.getMoves()<10000))
          {
             game.turn(); //do a turn
          }
          
-         if (game.getMoves()!=3000)//it's a finite game, not infinite
+         if (game.getMoves()!=10000)//it's a finite game, not infinite
          {
             moves.setText("Moves: "+game.getMoves()); //update moves text
             
@@ -248,7 +248,7 @@ public class WarGUI extends JFrame
          }
          else //it's an infinite game
          {
-            moves.setText("Infinite Game...No winner");
+            moves.setText("Moves exceeded 10,000...No winner");
             status.setText("");
          }      
          
