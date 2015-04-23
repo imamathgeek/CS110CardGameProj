@@ -77,20 +77,13 @@ public class Card
       showCard() returns a JLabel with the image of the card on it
       @reutrn JLabel
    */   
-   public JLabel showCard(String s,int r)
+   public JLabel showCard()
    {
       if (this!=null)
       {
          String st=this.getRank()+this.getSuitString()+".jpg";
          ImageIcon i=new ImageIcon(st);
-         JLabel label=new JLabel();
-         if (r==1)
-            label=new JLabel(s,i,JLabel.LEFT);
-         else if (r==2)
-            label=new JLabel(s,i,JLabel.RIGHT);
-         else if (r==3)
-            label=new JLabel(s,i,Label.CENTER);   
-         
+         JLabel label=new JLabel(i);
          return label;
       }
       else
@@ -104,12 +97,12 @@ public class Card
       showBack() method shows the back of the card
       @return JLabel with back of the card
    */      
-   public JLabel showBack(String s)
+   public JLabel showBack()
    {
    
       if (this!=null)
       {
-         JLabel label=new JLabel(s,new ImageIcon("back.jpg"),JLabel.CENTER);
+         JLabel label=new JLabel(new ImageIcon("back.jpg"));
          return label;      
       }
       else
