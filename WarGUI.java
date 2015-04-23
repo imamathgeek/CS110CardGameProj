@@ -117,13 +117,23 @@ public class WarGUI extends JFrame
          //do a turn and store the winner of the round as w
          int w=game.turn();
          
+         //set War cards to null
+         Card warDown1=null;
+         Card warDown2=null;
+         Card p1War=null;
+         Card p2War=null;
+
+         
          //store each of the cards for the turn, last 4 are null if it's not a war turn
          Card p1=game.getPlayer1Card();
          Card p2=game.getPlayer2Card();
-         Card warDown1=game.getPlayer1CardWarDown();
-         Card warDown2=game.getPlayer2CardWarDown();
-         Card p1War=game.getPlayer1CardWar();
-         Card p2War=game.getPlayer2CardWar();
+         if ((w==3) || (w==4))
+         {
+            warDown1=game.getPlayer1CardWarDown();
+            warDown2=game.getPlayer2CardWarDown();
+            p1War=game.getPlayer1CardWar();
+            p2War=game.getPlayer2CardWar();
+         }   
           
             
          //create all the JLabels
@@ -389,7 +399,8 @@ public class WarGUI extends JFrame
          }
          else //it's an infinite game
          {
-            status.setText("Infinite Game...No winner");
+            moves.setText("Infinite Game...No winner");
+            status.setText("");
          }      
          
          //remove cards from right and left panel and revalidate and repaint
