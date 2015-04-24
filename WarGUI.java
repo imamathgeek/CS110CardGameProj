@@ -84,6 +84,7 @@ public class WarGUI extends JFrame
       topPanel.add(title1,BorderLayout.NORTH); //add title in north panel of top panel
       
       status=new JLabel("ready?"); //starting status says "ready"
+      status.setFont(new Font("HELVETICA",Font.BOLD,16));
       numCards1=new JLabel("Player 1 has "+game.getCards1()); //starting num of cards in hand 1
       numCards2=new JLabel("Player 2 has "+game.getCards2()); //starting num of cards in hand 2
       
@@ -328,14 +329,14 @@ public class WarGUI extends JFrame
             playCard.setEnabled(false);
             skipToEnd.setEnabled(false);           
          }
-         else if (w==10)
+         else if (w==11)
          {
             moves.setText("Player 1 wins the GAME!");
             status.setText("");
             playCard.setEnabled(false);
             skipToEnd.setEnabled(false);
          }   
-         else if (w==11)
+         else if (w==12)
          {
             moves.setText("Player 2 wins the GAME!");
             status.setText(""); 
@@ -357,21 +358,21 @@ public class WarGUI extends JFrame
       {  
       
          //while there is no winner and while moves is less than an unreasonable number of terms   
-         while ((game.getWinner()==0) && (game.getMoves()<10000))
+         while ((game.getMoves()<10000) && (game.turn()!=11) && (game.turn()!=12))
          {
             game.turn(); //do a turn
          }
          
-         if (game.getMoves()!=10000)//it's a finite game, not infinite
+         if (game.getMoves()<10000)//it's a finite game, not infinite
          {
             moves.setText("Moves: "+game.getMoves()); //update moves text
             
             int w=game.getWinner(); //get winner
    
             //display winner
-            if (w==10)
+            if (w==11)
                status.setText("Player 1 wins this game");
-            else if (w==11)
+            else if (w==12)
                status.setText("Player 2 wins this game"); 
          }
          else //it's an infinite game
@@ -390,8 +391,8 @@ public class WarGUI extends JFrame
          
          
          //update how many cards each player has
-         numCards1.setText("Player 1 has "+game.getCards1());
-         numCards2.setText("Player 2 has "+game.getCards2());
+         numCards1.setText("");
+         numCards2.setText("");
          
          //disable the buttons
          skipToEnd.setEnabled(false);  

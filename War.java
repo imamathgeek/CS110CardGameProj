@@ -260,14 +260,15 @@ public class War
    
    /**
       getWinner returns the winner of the game
-      @return int 10 if player 1 wins, 11 if player2 wins and 0 if neither has won yet
+      @return int 11 if player 1 wins, 12 if player2 wins and 0 if neither has won yet
    */
    public int getWinner()
    {
+      System.out.println("getWinner()");
       if (hand1.isEmpty())
-         return 11;
+         return 12;
       else if (hand2.isEmpty())
-         return 10;
+         return 11;
       else
          return 0;      
    }   
@@ -278,50 +279,48 @@ public class War
    */
    public int getWinner1()
    {
+      System.out.println("getWinner1()");
       if (hand1.isEmpty())
       {
          hand2.addBottom(p1);
          hand2.addBottom(p2);
-         if (p1dWar!=null) //we got to double war
+         if (p1War!=null) //we got to double war
          {
             hand2.addBottom(p1War);
             hand2.addBottom(p2War);
             hand2.addBottom(warDown1d);
             hand2.addBottom(warDown2d);
             
-               if (p1tWar!=null) //we got to triple war
+               if (p1dWar!=null) //we got to triple war
                {
                   hand2.addBottom(p1dWar);
                   hand2.addBottom(p2dWar);
-                  hand2.addBottom(p1dWar);
-                  hand2.addBottom(p2dWar);
+                         
                  
                }
             }   
 
-         return 11;  
+         return 12;  
       }
       else if (hand2.isEmpty())
       {
          hand1.addBottom(p1);
          hand1.addBottom(p2);
-         if (p1dWar!=null) //we got to double war
+         if (p1War!=null) //we got to double war
          {
             hand1.addBottom(p1War);
             hand1.addBottom(p2War);
             hand1.addBottom(warDown1d);
             hand1.addBottom(warDown2d);
             
-               if (p1tWar!=null) //we got to triple war
+               if (p1dWar!=null) //we got to triple war
                {
-                  hand1.addBottom(p1dWar);
-                  hand1.addBottom(p2dWar);
                   hand1.addBottom(p1dWar);
                   hand1.addBottom(p2dWar);
                  
                }
             }    
-         return 10;
+         return 11;
       }   
       else
          return 0;      
@@ -333,6 +332,7 @@ public class War
    */
    public int getWinner2()
    {
+      System.out.println("getWinner2()");
       if (hand1.isEmpty()) //player 2 wins
       {
          //addd the cards
@@ -354,7 +354,7 @@ public class War
                   hand2.addBottom(warDown2t);
                }
          }
-         return 11;  
+         return 12;  
       }
       else if (hand2.isEmpty()) //player 2 wins
       {
@@ -377,7 +377,7 @@ public class War
                   hand1.addBottom(warDown2t);
                }
          }
-         return 10;
+         return 11;
       }   
       else
          return 0;      
