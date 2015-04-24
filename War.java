@@ -29,6 +29,10 @@ public class War
    */  
    public int turn()
    {
+      //hand 1 or 2 is empty
+      if ((hand1.isEmpty()) || (hand2.isEmpty()))
+         return getWinner(); //figure out the winner
+
       moves++; //increment moves
       
       //deal top card of each player
@@ -53,6 +57,8 @@ public class War
          return war();
       }
       
+      
+      
 
    }
    
@@ -64,7 +70,7 @@ public class War
    {
       try {
          if ((hand1.isEmpty()) || (hand2.isEmpty()))
-            getWinner();
+            return getWinner1();
          else   
          {
             //deal one card each face down
@@ -73,7 +79,7 @@ public class War
          }   
          
          if ((hand1.isEmpty()) || (hand2.isEmpty()))
-            getWinner();
+            return getWinner2();
          else   
          {
             //deal next card face up
@@ -99,7 +105,6 @@ public class War
             hand2.addBottom(warDown2); //add warDown2 to bottom of hand 1
             hand2.addBottom(p1War); //add p1War to bottom of hand 1
             hand2.addBottom(p2War); //add p2War to bottom of hand 1
-   
             return 4;
          }
          else
@@ -123,7 +128,7 @@ public class War
    {
       
       if ((hand1.isEmpty()) || (hand2.isEmpty()))
-         getWinner();
+         return getWinner1();
       else   
       {
          //deal one card each face down
@@ -132,7 +137,7 @@ public class War
       }   
       
       if ((hand1.isEmpty()) || (hand2.isEmpty()))
-         getWinner();
+         return getWinner2();
       else   
       {
          //deal next card face up
@@ -168,7 +173,6 @@ public class War
          hand1.addBottom(warDown2d); //add warDown2d to bottom of hand 2
          hand1.addBottom(p1dWar); //add p1dWar to bottom of hand 2
          hand1.addBottom(p2dWar); //add p2dWar to bottom of hand 2
-
          return 6;
       }
       else
@@ -184,7 +188,7 @@ public class War
    public int tripleWar()
    {
       if ((hand1.isEmpty()) || (hand2.isEmpty()))
-         getWinner();
+         return getWinner1();
       else   
       {
          //deal one card each face down
@@ -193,7 +197,7 @@ public class War
       }   
       
       if ((hand1.isEmpty()) || (hand2.isEmpty()))
-         getWinner();
+         return getWinner2();
       else   
       {
          //deal next card face up
@@ -237,7 +241,6 @@ public class War
          hand1.addBottom(warDown2t); //add warDown2d to bottom of hand 2
          hand1.addBottom(p1tWar); //add p1dWar to bottom of hand 2
          hand1.addBottom(p2tWar); //add p2dWar to bottom of hand 2
-
          return 8;
       }
       else
@@ -257,17 +260,128 @@ public class War
    
    /**
       getWinner returns the winner of the game
-      @return int 1 if player 1 wins, 2 if player2 wins and 0 if neither has won yet
+      @return int 10 if player 1 wins, 11 if player2 wins and 0 if neither has won yet
    */
    public int getWinner()
    {
       if (hand1.isEmpty())
-         return 2;
+         return 11;
       else if (hand2.isEmpty())
-         return 1;
+         return 10;
       else
          return 0;      
    }   
+   
+   /**
+      getWinner1 returns the winner of the game if a hand runs out during the first card down of a war
+      @return int 11 if player 1 wins, 12 if player2 wins and 0 if neither has won yet
+   */
+   public int getWinner1()
+   {
+      if (hand1.isEmpty())
+      {
+         hand2.addBottom(p1);
+         hand2.addBottom(p2);
+         if (p1dWar!=null) //we got to double war
+         {
+            hand2.addBottom(p1War);
+            hand2.addBottom(p2War);
+            hand2.addBottom(warDown1d);
+            hand2.addBottom(warDown2d);
+            
+               if (p1tWar!=null) //we got to triple war
+               {
+                  hand2.addBottom(p1dWar);
+                  hand2.addBottom(p2dWar);
+                  hand2.addBottom(p1dWar);
+                  hand2.addBottom(p2dWar);
+                 
+               }
+            }   
+
+         return 11;  
+      }
+      else if (hand2.isEmpty())
+      {
+         hand1.addBottom(p1);
+         hand1.addBottom(p2);
+         if (p1dWar!=null) //we got to double war
+         {
+            hand1.addBottom(p1War);
+            hand1.addBottom(p2War);
+            hand1.addBottom(warDown1d);
+            hand1.addBottom(warDown2d);
+            
+               if (p1tWar!=null) //we got to triple war
+               {
+                  hand1.addBottom(p1dWar);
+                  hand1.addBottom(p2dWar);
+                  hand1.addBottom(p1dWar);
+                  hand1.addBottom(p2dWar);
+                 
+               }
+            }    
+         return 10;
+      }   
+      else
+         return 0;      
+   } 
+   
+   /**
+      getWinner1 returns the winner of the game if a hand runs out during the second card down of a war
+      @return int 11 if player 1 wins, 12 if player2 wins and 0 if neither has won yet
+   */
+   public int getWinner2()
+   {
+      if (hand1.isEmpty()) //player 2 wins
+      {
+         //addd the cards
+         hand2.addBottom(p1);
+         hand2.addBottom(p2);
+         hand2.addBottom(warDown1); 
+         hand2.addBottom(warDown2);
+         if (warDown1d!=null) //we got to double war
+         {
+            hand2.addBottom(p1War);
+            hand2.addBottom(p2War);
+            hand2.addBottom(warDown1d);
+            hand2.addBottom(warDown2d);
+               if (warDown1t!=null) //we got to triple war
+               {
+                  hand2.addBottom(p1dWar);
+                  hand2.addBottom(p2dWar);
+                  hand2.addBottom(warDown1t);
+                  hand2.addBottom(warDown2t);
+               }
+         }
+         return 11;  
+      }
+      else if (hand2.isEmpty()) //player 2 wins
+      {
+         //ad the cards
+         hand1.addBottom(p1);
+         hand1.addBottom(p2);
+         hand1.addBottom(warDown1);
+         hand1.addBottom(warDown2);
+         if (warDown1d!=null) //we got to double war
+         {
+            hand1.addBottom(p1War);
+            hand1.addBottom(p2War);
+            hand1.addBottom(warDown1d);
+            hand1.addBottom(warDown2d);
+               if (warDown1t!=null) //we got to triple war
+               {
+                  hand1.addBottom(p1dWar);
+                  hand1.addBottom(p2dWar);
+                  hand1.addBottom(warDown1t);
+                  hand1.addBottom(warDown2t);
+               }
+         }
+         return 10;
+      }   
+      else
+         return 0;      
+   } 
    
    /**
       getPlayer1Card method returns player1's card (non-war)

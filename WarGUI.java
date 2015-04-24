@@ -328,6 +328,20 @@ public class WarGUI extends JFrame
             playCard.setEnabled(false);
             skipToEnd.setEnabled(false);           
          }
+         else if (w==10)
+         {
+            moves.setText("Player 1 wins the GAME!");
+            status.setText("");
+            playCard.setEnabled(false);
+            skipToEnd.setEnabled(false);
+         }   
+         else if (w==11)
+         {
+            moves.setText("Player 2 wins the GAME!");
+            status.setText(""); 
+            playCard.setEnabled(false);
+            skipToEnd.setEnabled(false);   
+         }     
 
          //update how many cards each player has in their hands
          numCards1.setText("Player 1 has "+game.getCards1());
@@ -355,9 +369,9 @@ public class WarGUI extends JFrame
             int w=game.getWinner(); //get winner
    
             //display winner
-            if (w==1)
+            if (w==10)
                status.setText("Player 1 wins this game");
-            else if (w==2)
+            else if (w==11)
                status.setText("Player 2 wins this game"); 
          }
          else //it's an infinite game
