@@ -18,6 +18,8 @@ public class WarGUI extends JFrame
    private JLabel title1,status,numCards1,numCards2;   //title and status
    private JLabel p1Label,p2Label,warDown1Label,warDown2Label,p1WarLabel,p2WarLabel,warDown1dLabel,warDown2dLabel,p1dWarLabel,p2dWarLabel,warDown1tLabel,warDown2tLabel,p1tWarLabel,p2tWarLabel;//labels with card images
    private ImageIcon blue,purple; //blank JLabels colored as background
+   private ImageIcon rollEyes,win; //image icons for end
+   private JLabel winLabel,rollEyesLabel; //labels for end
    
    
    // build the GUI
@@ -55,7 +57,15 @@ public class WarGUI extends JFrame
       playCard.setHorizontalAlignment(JLabel.CENTER); //put playCard in center
       skipToEnd.setHorizontalAlignment(JLabel.CENTER); //put skipToEnd in center
  
-      
+      //ending gifs
+      rollEyes=new ImageIcon("rolleyes.gif");
+      win=new ImageIcon("win.gif");
+      rollEyesLabel=new JLabel("You lose",rollEyes,JLabel.CENTER);
+      winLabel=new JLabel("You win",win,JLabel.CENTER);
+      rollEyesLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+      winLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+      rollEyesLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
+      winLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
  
       //create empty labels for cards labels
       blue=new ImageIcon("blue.jpg");
@@ -331,17 +341,43 @@ public class WarGUI extends JFrame
          }
          else if (w==11)
          {
-            moves.setText("Player 1 wins the GAME!");
-            status.setText("");
-            playCard.setEnabled(false);
-            skipToEnd.setEnabled(false);
+            moves.setText("Player 1 wins the GAME!"); //disp who onw
+            status.setText(""); //get rid of status count
+            playCard.setEnabled(false); //disable the button
+            skipToEnd.setEnabled(false); //disable the button
+            
+            //get rid of the cards
+            rightPanel.removeAll();
+            leftPanel.removeAll();
+            rightPanel.revalidate();
+            leftPanel.revalidate();
+            rightPanel.repaint();
+            leftPanel.repaint();
+            
+            //add ending gifs
+            leftPanel.add(winLabel);
+            rightPanel.add(rollEyesLabel);
+            
          }   
          else if (w==12)
          {
-            moves.setText("Player 2 wins the GAME!");
-            status.setText(""); 
-            playCard.setEnabled(false);
-            skipToEnd.setEnabled(false);   
+            moves.setText("Player 2 wins the GAME!"); //disp who onw
+            status.setText(""); //get rid of status count
+            playCard.setEnabled(false); //disable the button
+            skipToEnd.setEnabled(false); //disable the button 
+            
+            //get rid of the cards
+            rightPanel.removeAll();
+            leftPanel.removeAll();
+            rightPanel.revalidate();
+            leftPanel.revalidate();
+            rightPanel.repaint();
+            leftPanel.repaint();  
+            
+            //add ending gifs
+            rightPanel.add(winLabel);
+            leftPanel.add(rollEyesLabel);
+            
          }     
 
          //update how many cards each player has in their hands
@@ -357,6 +393,14 @@ public class WarGUI extends JFrame
       public void actionPerformed(ActionEvent e)
       {  
       
+         //remove cards from right and left panel and revalidate and repaint
+         rightPanel.removeAll();
+         leftPanel.removeAll();
+         rightPanel.revalidate();
+         leftPanel.revalidate();
+         rightPanel.repaint();
+         leftPanel.repaint();
+      
          //while there is no winner and while moves is less than an unreasonable number of terms   
          while ((game.getMoves()<10000) && (game.turn()!=11) && (game.turn()!=12))
          {
@@ -371,9 +415,17 @@ public class WarGUI extends JFrame
    
             //display winner
             if (w==11)
+            {
                status.setText("Player 1 wins this game");
+               leftPanel.add(winLabel);
+               rightPanel.add(rollEyesLabel);
+            }
             else if (w==12)
+            {
                status.setText("Player 2 wins this game"); 
+               rightPanel.add(winLabel);
+               leftPanel.add(rollEyesLabel);
+            }
          }
          else //it's an infinite game
          {
@@ -381,13 +433,9 @@ public class WarGUI extends JFrame
             status.setText("");
          }      
          
-         //remove cards from right and left panel and revalidate and repaint
-         rightPanel.removeAll();
-         leftPanel.removeAll();
-         rightPanel.revalidate();
-         leftPanel.revalidate();
-         rightPanel.repaint();
-         leftPanel.repaint();
+         
+         
+         
          
          
          //update how many cards each player has

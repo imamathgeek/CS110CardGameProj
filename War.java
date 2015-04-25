@@ -264,7 +264,6 @@ public class War
    */
    public int getWinner()
    {
-      System.out.println("getWinner()");
       if (hand1.isEmpty())
          return 12;
       else if (hand2.isEmpty())
@@ -279,7 +278,6 @@ public class War
    */
    public int getWinner1()
    {
-      System.out.println("getWinner1()");
       if (hand1.isEmpty())
       {
          hand2.addBottom(p1);
@@ -332,7 +330,6 @@ public class War
    */
    public int getWinner2()
    {
-      System.out.println("getWinner2()");
       if (hand1.isEmpty()) //player 2 wins
       {
          //addd the cards
