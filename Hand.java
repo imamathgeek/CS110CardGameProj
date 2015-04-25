@@ -14,6 +14,7 @@ public class Hand extends CardPile
       
    /**
       Hand constructor
+      @param num Number of starting cards in hand
    */
    public Hand(int num)
    {
@@ -29,7 +30,7 @@ public class Hand extends CardPile
    
    /**
       add method adds a card to the pile
-      @param Card c
+      @param c Card
    */   
    public void add(Card c)
    {
@@ -38,7 +39,7 @@ public class Hand extends CardPile
       
    /**
       add method adds a card to the pile
-      @param Card c
+      @param c Card
    */   
    public void addBottom(Card c)
    {

@@ -22,7 +22,8 @@ public class CardPile
    
    /**
       add method adds a card to the pile
-      @param Card c
+      @param c Card
+      @param i index
    */   
    public void add(int i,Card c)
    {
@@ -52,7 +53,7 @@ public class CardPile
    /**
       get() method returns the card at specified index
       @return Card object
-      @param int index
+      @param  i int index
    */
    public Card get(int i)
    {
@@ -61,7 +62,7 @@ public class CardPile
    
    /**
       remove() method removes the card at the specifed index
-      @param int Index
+      @param i int Index
    */
    public void remove(int i)
    {

@@ -27,7 +27,7 @@ public class Card
    
    /**
       Card Copy constructor
-      @param Card card
+      @param card Card
    */
    public Card(Card card)
    {
@@ -75,7 +75,7 @@ public class Card
    
    /**
       showCard() returns a JLabel with the image of the card on it
-      @reutrn JLabel
+      @return JLabel
    */   
    public JLabel showCard()
    {
@@ -116,7 +116,7 @@ public class Card
       
    /**
       showCard() returns a ImageIcon with the image of the card on it
-      @reutrn ImageIcon
+      @return ImageIcon
    */   
    public ImageIcon showCardIcon()
    {
