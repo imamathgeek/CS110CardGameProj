@@ -218,7 +218,10 @@ public class WarGUI extends JFrame
 
       
          //set icons of war cards to actual card pix
-         if ((w>=3))
+         if (w>=11)
+         {
+         }
+         else if ((w>=3))
          {
             warDown1Label.setIcon(warDown1.showBackIcon());
             p1WarLabel.setIcon(p1War.showCardIcon());
@@ -341,7 +344,7 @@ public class WarGUI extends JFrame
          }
          else if (w==11)
          {
-            moves.setText("Player 1 wins the GAME!"); //disp who onw
+            moves.setText("Player 1 wins the GAME!"); //disp who won
             status.setText(""); //get rid of status count
             playCard.setEnabled(false); //disable the button
             skipToEnd.setEnabled(false); //disable the button
@@ -361,7 +364,7 @@ public class WarGUI extends JFrame
          }   
          else if (w==12)
          {
-            moves.setText("Player 2 wins the GAME!"); //disp who onw
+            moves.setText("Player 2 wins the GAME!"); //disp who won
             status.setText(""); //get rid of status count
             playCard.setEnabled(false); //disable the button
             skipToEnd.setEnabled(false); //disable the button 
